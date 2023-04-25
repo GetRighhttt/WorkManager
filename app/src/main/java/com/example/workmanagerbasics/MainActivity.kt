@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.work.Constraints
+import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.example.workmanagerbasics.databinding.ActivityMainBinding
@@ -42,14 +43,16 @@ class MainActivity : AppCompatActivity() {
         val workManager = WorkManager.getInstance(applicationContext)
 
         // constraints instance - sets constraints for when task should be performed
-        val constraints = Constraints.Builder()
+        val uploadDataConstraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
             .setRequiresCharging(true)
-            .setRequiresBatteryNotLow(true)
+            .build()
+
 
         // variable for one time request
         val uploadWorkRequest = OneTimeWorkRequest.Builder(WorkerClass::class.java)
             .setInitialDelay(3000, TimeUnit.MILLISECONDS)
-            .setConstraints(constraints = Constraints())
+            .setConstraints(uploadDataConstraints)
             .build()
 
         // enqueueing the one time request
