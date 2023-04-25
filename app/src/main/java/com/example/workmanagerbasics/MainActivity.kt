@@ -4,13 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.work.Constraints
-import androidx.work.ListenableWorker
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequest
-import androidx.work.PeriodicWorkRequest
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import androidx.work.WorkRequest
 import com.example.workmanagerbasics.databinding.ActivityMainBinding
 import java.util.concurrent.TimeUnit
 
@@ -28,10 +25,13 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        startWorkManager()
+        floatingActionButtonOnClick()
     }
 
-    private fun startWorkManager() {
+    /*
+    Launches work manager's request with an on click.
+    */
+    private fun floatingActionButtonOnClick() {
         binding.apply {
             floatingActionButton.setOnClickListener {
                 setOneTimeWorkRequest()
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         // constraints instance - sets constraints for when task should be performed
         val uploadDataConstraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
-//            .setRequiresCharging(true)
+            // .setRequiresCharging(true)
             .build()
 
 
