@@ -10,23 +10,23 @@
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
         android:layout_margin="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:clickable="true"
+        android:contentDescription="@string/button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:contentDescription="@string/button" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:text="@string/start_work"
         android:textSize="20sp"
-        android:layout_margin="20dp"
-        app:layout_constraintEnd_toEndOf="@id/floatingActionButton"
         app:layout_constraintBottom_toTopOf="@id/floatingActionButton"
-        app:layout_constraintStart_toStartOf="@id/floatingActionButton"/>
+        app:layout_constraintEnd_toEndOf="@id/floatingActionButton"
+        app:layout_constraintStart_toStartOf="@id/floatingActionButton" />
 
     <TextView
         android:id="@+id/text_info"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:text="INFO"
+        android:text="@string/info"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="SecondInfo"
+        android:text="@string/secondinfo"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
