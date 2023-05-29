@@ -23,7 +23,7 @@ class WorkerClass(
     }
 
     override fun doWork(): Result = try {
-        for (i in 1..6000) {
+        for (i in 1..100) {
             Log.d(WORKER, "doWork: $i")
         }
         Result.success()

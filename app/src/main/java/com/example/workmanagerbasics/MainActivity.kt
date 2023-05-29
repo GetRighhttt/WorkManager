@@ -3,12 +3,15 @@ package com.example.workmanagerbasics
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
+import androidx.work.BackoffPolicy
 import androidx.work.Constraints
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequest
+import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.workmanagerbasics.databinding.ActivityMainBinding
+import java.time.Duration
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
@@ -53,14 +56,19 @@ class MainActivity : AppCompatActivity() {
             .build()
 
 
-        // variable for one time request
-        val uploadWorkRequest = OneTimeWorkRequest.Builder(WorkerClass::class.java)
-            .setInitialDelay(3000, TimeUnit.MILLISECONDS)
+        /*
+        Variable to display one time work request.
+        BackOffPolicy is used to send a request after an allocated time, and linear defines how the
+        policy should increase over time.
+         */
+        val uploadWorkRequest = OneTimeWorkRequestBuilder<WorkerClass>()
+            .setInitialDelay(Duration.ofSeconds(3))
+            .setBackoffCriteria(backoffPolicy = BackoffPolicy.LINEAR, Duration.ofSeconds(12))
             .setConstraints(uploadDataConstraints)
             .build()
 
         val numerousWorkRequest =
-            PeriodicWorkRequestBuilder<WorkerClass>(5000, TimeUnit.MILLISECONDS)
+            PeriodicWorkRequestBuilder<WorkerClass>(Duration.ofSeconds(5))
 
         // enqueueing the one time request
         workManager.enqueue(uploadWorkRequest)
